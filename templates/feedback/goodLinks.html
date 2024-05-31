@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Полезные ссылки {% endblock title %}
+
+{% block content %}
+<main style="display: flex; flex-direction: column; align-items: center;">
+    <section style="margin-bottom: 20px; margin-top: 20px">
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 20px;">
+                <a href="https://www.foodnetwork.com/" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="{% static 'images/logo/logo.png' %}" alt="logo" style="width: 50px; margin-right: 10px;">
+                    Food Network - крупнейший сайт с кулинарными рецептами и советами
+                </a>
+            </li>
+            <li style="margin-bottom: 20px;">
+                <a href="https://www.epicurious.com/" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="{% static 'images/logo/logo.svg' %}" alt="logo" style="width: 50px; margin-right: 10px;">
+                    Epicurious - рецепты, видеоуроки и статьи о кулинарии
+                </a>
+            </li>
+            <li>
+                <a href="https://www.allrecipes.com/" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="{% static 'images/logo/logoo.png' %}" alt="logo" style="width: 50px; margin-right: 10px;">
+                    Allrecipes - огромная база рецептов со всего мира
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <iframe width="720" height="405" src="https://rutube.ru/play/embed/a756eb969b8a10404ee1f3ea2adf0170" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </section>
+</main>
+{% endblock content %}

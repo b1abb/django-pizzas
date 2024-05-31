@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <title> Регистрация пользователя </title>
+    <div class="container" style="margin-top: 60px;">
+        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 28px;">
+            {% include 'messages.html' %}
+        </div>
+
+        <form action="/register" method="POST">
+            {% csrf_token %}
+
+            <div class="row">
+                <h3 class="default-style"> Портал регистрации</h3>
+                <hr>
+                <p class="default-style">Заполните форму корректно, чтобы создать учетную запись </p>
+                <p class="register-infos text-center">Информация для регистрации: </p>
+                <div class="form-group col-md-6">
+                    <label for="username">Имя</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name"
+                           aria-describedby="FirstNameHelp" placeholder="Введите ваше имя" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="username">Фамилия</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name"
+                           aria-describedby="LastNameHelp" placeholder="Введите вашу фамилию" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="username">Имя пользователя</label>
+                    <input type="text" class="form-control" name="username" id="username"
+                           aria-describedby="usernameHelp" placeholder="Введите ваше имя пользователя" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Email">Электронная почта</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
+                           placeholder="Введите ваш адрес электронной почты" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" name="password" id="password"
+                           aria-describedby="passwordHelp" placeholder="Введите ваш пароль" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password">Повторите пароль</label>
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password"
+                           placeholder="Повторите ваш пароль" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" class="form-control" name="phone" id="phone"
+                           placeholder="Введите ваш номер телефона" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">Отправить</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

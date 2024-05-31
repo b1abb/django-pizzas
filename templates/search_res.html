@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+    <title> Результаты вашего поиска </title>
+    <div class="row">
+        <h4 class="category-title text-center" style="font-family: Poppins; font-weight: 600;"> Пиццы
+            > {{ pizzas.cat }} </h4>
+    </div>
+    <hr class="align:center"/>
+
+    <div class="container ms-auto" style="margin-top: 50px;">
+        <div class="row">
+            {% if not pizzas %}
+                <p class="text text-center text-warning"> Извините, но пиццы не найдены </p>
+                <p>Попробуйте другие ключевые слова для поиска</p>
+            {% else %}
+                {% for pizza in pizzas %}
+                    <div class="product-box col-md-2 col-sm-6">
+                        <a class="text-decoration-none" href="/pizza/{{ pizza.slug }}">
+                            <img class="product-img" src="{{ pizza.image.url }}"/>
+                            <h3 class="pizza-title">{{ pizza.title }} </h3>
+                            <p class="pizza-price"><b>₽ {{ pizza.price }}</b></p>
+                            <button class="btn btn-custom"> Купить сейчас</button>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

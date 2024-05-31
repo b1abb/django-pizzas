@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <title>Купить {{ pizza.title }} от {{ pizza.size }} </title>
+    <section>
+        <div class="container" style="padding-top: 60px; padding-bottom: 20px;">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <img src="{{ pizza.image.url }}" style="height: 529px;"/>
+                </div>
+                <div class="col-md-5" style="margin-left: 100px;">
+                    <h3 class="pizza-title-single">{{ pizza.title }} </h3>
+                    <h4 class="pizza-price-single mt-3">₽ {{ pizza.price }}</h4>
+                    <div class="row">
+                        <div class="col-7 col-md-6 g-0">
+                            <span class="pizza-size">{{ pizza.size }} </span>
+                        </div>
+                    </div>
+                    <p class="pizza-short-desc-single mt-3 g-0">
+                        {{ pizza.description|truncatewords:21 }}
+                    </p>
+                    <div class="row g-0 pt-4">
+                        <div class="col">
+                            {% if pizza.stocks <= 0 %}
+                                <button class="btn boihut-addnow-btn btn-disabled">Нет в наличии</button>
+                            {% elif not pizza.stocks_available %}
+                                <h3 class="color-red">Товар не доступен</h3>
+                            {% else %}
+                                <a href="{% url 'add_cart' pizza.slug %}" style="
+                    border: 2px solid #ffeeb6; 
+                    background-color: #ffeeb6; 
+                    border-radius: 25px;
+                    padding: 10px 20px; /* Сокращенное написание для padding-left и padding-right */
+                    display: inline-flex; 
+                    align-items: center;
+                    color: #4B3621;
+                    font-weight: bold;
+                    text-decoration: none; /* Убираем подчеркивание */
+                    transition: background-color 0.3s, border-color 0.3s;" role="button">Добавить в
+                                    корзину</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row g-0 mt-3">
+                        <div class="col-3 col-md-2 col-sm-6 g-0">
+                            <span class="pizza-default-single align-items-left">Категория:</span>
+                        </div>
+                        <div class="col-6 col-sm-6 g-0">
+                            <span class="pizza-size">{{ pizza.category }} </span>
+                        </div>
+                    </div>
+                    <div class="row g-0 mt-3">
+                        <div class="col-2 col-md-2 g-0">
+                            <span class="pizza-default-single align-items-left"> Поделиться:</span>
+                        </div>
+                        <div class="col-6 col-md-4 g-0">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                               target="_blank" rel="noopener"><i class="fa-brands fa-facebook fa-custom"></i></a>
+                            <a href="http://twitter.com/intent/tweet/?url={{ request.build_absolute_uri }}"
+                               target="_blank" rel="noopener"><i class="fa-brands fa-twitter fa-custom"></i></a>
+                            <a href="https://instagram.com/?url={{ request.build_absolute_uri }}" target="_blank"
+                               rel="noopener"><i class="fa-brands fa-instagram fa-custom"></i></a>
+                            <a href="http://pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}"
+                               target="_blank" rel="noopener"><i class="fa-brands fa-pinterest fa-custom"></i></a>
+                            <a href="whatsapp://send?text={{ pizza.title }} available on {{ request.build_absolute_uri }}"
+                               target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp fa-custom"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12" style="margin-top: 83px; width: 300px">
+                        <p class="text-danger" style="font-size: 14px; font-weight: 600;"><b>Не стесняйтесь общаться с
+                            нами</b></p>
+                        <div class="sidebar-style"><i class="fa-solid fa-box"></i> Доставка за 24 часа</div>
+                        <div class="sidebar-style"><i class="fa-solid fa-truck-clock"></i> Бесплатная доставка</div>
+                        <div class="sidebar-style"><i class="fa-solid fa-arrow-rotate-left"></i> Возврат в течение 30 дней
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 53px">
+                <div class="col-9">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">Описание
+                            </button>
+                            <hr>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <p class="description">{{ pizza.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 70px;">
+            <div class="row text-center">
+                <h3 class="text-front-page pt-3">Похожие пиццы</h3>
+            </div>
+            <div class="product container">
+                <div class="row">
+                    {% for related_pizza in related_pizzas|slice:":4" %}
+                        <div class="col-6 col-md-4 col-lg-3 mb-4">
+                            <a class="text-decoration-none" href="/pizza/{{ related_pizza.slug }}">
+                                <img class="product-img" style="width: 100%; height: auto;" src="{{ related_pizza.image.url }}"/>
+                                <h3 class="pizza-title">{{ related_pizza.title }}</h3>
+                                <p class="pizza-price"><b>{{ related_pizza.price }}</b></p>
+                                <button class="btn btn-custom">Купить сейчас</button>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <style>
+            .sort-options a {
+                margin-right: 10px;
+                text-decoration: none;
+            }
+
+            .sort-options a.active {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+            .review {
+                background-color: #f8f9fa;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .review h4 {
+                margin-bottom: 10px;
+                font-size: 18px;
+                color: #333;
+            }
+
+            .review p {
+                margin-bottom: 10px;
+                color: #555;
+            }
+
+            .review p small {
+                color: #777;
+            }
+
+            .sort-options {
+                margin-bottom: 20px;
+            }
+
+            .sort-options span {
+                font-weight: bold;
+            }
+        </style>
+
+        <div class="container" style="margin-top: 70px;">
+            <div class="row">
+                <h3 class="text-front-page pt-3">Отзывы</h3>
+                <div class="col-12">
+                    <div class="sort-options">
+                        <span>Сортировать по:</span>
+                        <a href="?sort=date" class="{% if sort_by == 'date' %}active{% endif %}">Дате</a> |
+                        <a href="?sort=rating" class="{% if sort_by == 'rating' %}active{% endif %}">Рейтингу</a>
+                    </div>
+                    {% for review in reviews %}
+                        <div class="review">
+                            <h4>{{ review.user.username }}</h4>
+                            <p>Рейтинг: {{ review.rating }} / 5</p>
+                            <p>{{ review.comment }}</p>
+                            <p><small>{{ review.created_on }}</small></p>
+                        </div>
+                    {% empty %}
+                        <p>Отзывов пока нет.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <h3 class="text-front-page pt-3">Оставить отзыв</h3>
+                <div class="col-12">
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'single_pizza' single_pizza_slug=pizza.slug %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+                        </form>
+                    {% else %}
+                        <p>Пожалуйста, <a href="{% url 'login' %}">войдите</a> или <a href="{% url 'register' %}">зарегистрируйтесь</a>,
+                            чтобы оставить отзыв.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

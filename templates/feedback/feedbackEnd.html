@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Обратная связь {% endblock title %}
+
+{% block content %}
+    <style>
+        .thank-you-container {
+            margin-top: 60px;
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .thank-you-heading {
+            color: #343a40;
+            font-weight: bold;
+        }
+
+        .thank-you-message {
+            color: #6c757d;
+        }
+
+        .feedback-details {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .feedback-details p {
+            color: #495057;
+        }
+
+        .feedback-details strong {
+            color: #212529;
+        }
+
+    </style>
+    <div class="container mt-5">
+        <div class="thank-you-container text-center">
+            <h1 class="thank-you-heading display-4">Спасибо за обратную связь!</h1>
+            <p class="thank-you-message lead">Мы очень ценим ваше мнение и обязательно учтем его.</p>
+            <div class="feedback-details mt-4 p-4 rounded shadow">
+                <p class="mb-2"><strong>Имя:</strong> {{ name }}</p>
+                <p class="mb-2"><strong>Email:</strong> {{ email }}</p>
+                <p class="mb-2"><strong>Тема:</strong> {{ theme }}</p>
+                <p class="mb-2"><strong>Сообщение:</strong> {{ message }}</p>
+                <p class="mb-0"><strong>Отправлено:</strong> {{ created_at }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

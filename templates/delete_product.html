@@ -1,0 +1,14 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container" style="margin-top: 40px;">
+        <h2 class="default-style">Удалить продукт</h2>
+        <p>Вы уверены, что хотите удалить продукт "{{ product.title }}"?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a href="{% url 'product_list' %}" class="btn btn-secondary">Отменить</a>
+        </form>
+    </div>
+{% endblock content %}

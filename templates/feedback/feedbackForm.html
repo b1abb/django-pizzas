@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Обратная связь {% endblock title %}
+
+{% block content %}
+    <div class="feedback-container" style="width: 600px; margin-left: 30%;">
+        <h1 style="margin: 10px 0; text-align: center;">Форма обратной связи</h1>
+        <form method="post" class="feedback-form" id="feedback-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-button" disabled>Отправить</button>
+        </form>
+    </div>
+    <style>
+        select, input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Добавляем стили для подсветки полей при наведении */
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        textarea:hover {
+            background-color: #fff9c4;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('feedback-form');
+            var submitButton = form.querySelector('.submit-button');
+
+            // Функция для проверки заполненности полей формы
+            function checkForm() {
+                var inputs = form.querySelectorAll('input[type="text"], input[type="email"], textarea');
+                var isFormValid = true;
+                
+                inputs.forEach(function (input) {
+                    if (!input.value.trim()) {
+                        isFormValid = false;
+                    }
+                });
+                
+                submitButton.disabled = !isFormValid;
+            }
+
+            // Слушаем изменения в полях формы
+            form.addEventListener('input', function () {
+                checkForm();
+            });
+
+            // Проверяем форму при загрузке страницы
+            checkForm();
+
+            // Добавляем обработчик для вывода строки при наведении на кнопку
+            submitButton.addEventListener('mouseover', function () {
+                console.log('buttonaction');
+            });
+        });
+    </script>
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .dashboard-card {
+            border: none;
+            border-radius: 10px;
+        }
+
+        .dashboard-card:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        .table thead th {
+            border-top: none;
+            border-bottom: 2px solid #dee2e6;
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+
+    </style>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            {% include 'dashboard-menu.html' %}
+            <div class="col-lg-9 ml-md-auto">
+                <h3 class="mb-4">Панель управления пользователя</h3>
+                <hr>
+
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <a href="/dashboard/orders" class="text-decoration-none">
+                            <div class="card dashboard-card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fa fa-user fa-dashboard"></i> Всего заказов</h5>
+                                    <p class="card-text">{{ total_orders }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Add similar cards for other statistics -->
+
+                </div>
+
+                <p class="mb-3">Ваши последние заказ</p>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID заказа</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Дата создания</th>
+                        <th scope="col">Детали заказа</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in order_id_list %}
+                        <tr>
+                            <th scope="row">{{ order.order_id }}</th>
+                            <td>{{ order.order_status }}</td>
+                            <td>{{ order.date_created }}</td>
+                            <td><a href="/dashboard/view_order/{{ order.order_id }}">Посмотреть заказ</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+    <title>PizzeriaDjango - Купить пиццу онлайн</title>
+    <link href="{% static '/src/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static '/src/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/banner6.jpg' %}" class="d-block w-100" alt="Slide 1">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/banner4.jpg' %}" class="d-block w-100" alt="Slide 2">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/banner3.jpg' %}" class="d-block w-100" alt="Slide 3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <section style="background-color: #ffd280; height: 450px">
+        <div style="display: flex; justify-content: space-between; padding-right: 150px; padding-left: 150px">
+            <div>
+                <h1 class="boihut-one display-4" style="font-weight: bold">Заказывайте свои</h1>
+                <h1 class="boihut-one display-4" style="font-weight: bold; margin-top: -20px"><span
+                        class="boihut-favorite">любимые </span>пиццы</h1>
+                <p class="boihut hero-text" style="font-weight: bold; color: rgba(115,74,19,0.48)">Иногда для счастья
+                    достаточно коробки пиццы… в крайнем случае двух!</p>
+                <p class="lead ">
+                    <a style="
+                    border: 2px solid #ffeeb6; 
+                    background-color: #ffeeb6; 
+                    border-radius: 25px;
+                    padding: 10px 20px; /* Сокращенное написание для padding-left и padding-right */
+                    display: inline-flex; 
+                    align-items: center;
+                    color: #4B3621;
+                    font-weight: bold;
+                    text-decoration: none; /* Убираем подчеркивание */
+                    transition: background-color 0.3s, border-color 0.3s;" href="/category/" role="button">Заказать
+                        сейчас</a>
+                </p>
+            </div>
+
+            <div style="width: auto">
+                <img src="{% static 'images/pizza-svgrepo-com.svg' %}" style="width: 400px; height: 400px"/>
+            </div>
+        </div>
+    </section>
+
+    <hr class="align:center"/>
+
+    <style>
+        .pizza-box {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pizza-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .pizza-box img {
+            transition: transform 0.3s;
+        }
+
+        .pizza-box:hover img {
+            transform: scale(1.05);
+        }
+
+        .boihut-favorite {
+            color: #cc5500;
+
+        }
+
+        .boihut-one {
+            color: #ffa81c;
+
+        }
+    </style>
+
+    <div style="box-shadow: rgba(208,193,123,0.58) 5px 5px 5px; border-radius: 40px; margin-left: 150px; margin-right: 150px">
+        <div class="row" style="margin-top:-90px;background:#FFFFFF;border-radius: 40px;">
+            <h3 style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; margin-top: 20px">
+                Меню </h3>
+            {% for pizza in pizzas %}
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                    <div class="product-box text-center pizza-box"
+                         style="border-radius: 15px; overflow: hidden; padding-left: 15px; padding-top: 15px">
+                        <a class="text-decoration-none" href="pizza/{{ pizza.slug }}">
+                            <img class="product-img img-fluid" src="{{ pizza.image.url }}" alt="pizza"
+                                 style="width: 100%; height: auto;"/>
+                            <h3 class="pizza-title">{{ pizza.title }} </h3>
+                            <p class="pizza-price"><b>₽ {{ pizza.price }}</b></p>
+                            <button class="btn btn-custom">Заказать сейчас</button>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock content %}
