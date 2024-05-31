@@ -1,0 +1,98 @@
+nav.navbar {
+    background-color: #4B3621; /* Темно-коричневый цвет */
+}
+
+nav.navbar .nav-links {
+    display: flex; /* Горизонтальное расположение ссылок */
+    align-items: center;
+}
+
+nav.navbar .nav-links .nav-link,
+nav.navbar .nav-links .navbar-toggler {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+nav.navbar .nav-links .nav-link:hover,
+nav.navbar .nav-links .navbar-toggler:hover {
+    background-color: rgba(0, 0, 0, 0.2); /* Затемнение при наведении */
+}
+
+.footer {
+    margin-top: 80px;
+    background: #181818;
+    padding-top: 29px;
+    padding-bottom: 20px
+
+}
+
+.footer-container {
+    padding-top: 200px;
+    padding-bottom: 50px;
+
+}
+
+.footer-link {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 141.7%;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+}
+
+
+.footer-useful {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 178.7%;
+    letter-spacing: 0.045em;
+    color: #FFFFFF;
+
+}
+
+p.footer-about {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.6px;
+    color: #FFFFFF;
+    line-height: 144.69%;
+}
+
+
+.footer-copyright {
+    background: #5A5A5A;
+    height: 38px;
+}
+
+
+.footer-copyright-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 178.7%;
+
+    letter-spacing: 0.045em;
+    padding-top: 5px;
+
+    color: #FFFFFF;
+
+}
+
+.footer-col {
+    padding-right: 70px;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 3px solid #eeeeee !important;
+    width: 40px;
+}
